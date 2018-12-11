@@ -125,6 +125,29 @@ public class AvaliadorTest {
         assertEquals(150, avaliador.getMenorLance(), 000000001);
     }
 
+    @Test
+    public void deveEntenderLeilaoComLancesEmOrdemDecrescente() {
+        List<Leilao> leilaos = new ArrayList<Leilao>();
+        Leilao leilao = new Leilao("Carro usado");
+
+        Usuario joao = new Usuario(1, "João");
+        Usuario maria = new Usuario(2, "Maria");
+        Usuario pedro = new Usuario(3, "Pedro");
+
+        leilao.propoe(new Lance(joao, 400));
+        leilao.propoe(new Lance(maria, 300));
+        leilao.propoe(new Lance(pedro, 200));
+        leilao.propoe(new Lance(joao, 100));
+
+        Avaliador avaliador = new Avaliador();
+
+        avaliador.avalia(leilao);
+        assertEquals(400, avaliador.getMaiorLance(), 000000001);
+        assertEquals(100, avaliador.getMenorLance(), 000000001);
+
+
+    }
+
     public Usuario obterUsuarioAleatoriamente() {
         Random random = new Random();
 
